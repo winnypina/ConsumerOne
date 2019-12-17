@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<views:MvxContentPage x:TypeArguments="viewModels:NewPostPriceViewModel" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms" xmlns:viewModels="clr-namespace:ConsumerOne.Mobile.ViewModels;assembly=ConsumerOne.Mobile" xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms" xmlns:controls="clr-namespace:ConsumerOne.Mobile.Controls;assembly=ConsumerOne.Mobile" x:Class="ConsumerOne.Mobile.Views.NewPostPriceView">
+    <ContentPage.Content>
+        <Grid>
+             <Grid.Padding>
+                <OnPlatform x:TypeArguments="Thickness" Android="0,0,0,60"></OnPlatform>
+            </Grid.Padding>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="30" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid BackgroundColor="Black" Grid.ColumnSpan="3" HeightRequest="75">
+                    <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface" />
+                    <Label Text="Promover" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,20,0,0"
+                               FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FFFFFFFF" />
+                </Grid>
+                <ScrollView Grid.Row="1" Grid.Column="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Margin="0,20,0,0" Grid.Row="0" Text="Insira o valor abaixo" VerticalOptions="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontFamily="HelveticaNeue#400" FontSize="25" FontAttributes="None" TextColor="#FF6F7796" />
+                        <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" Margin="0,20,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40*" />
+                                <ColumnDefinition Width="60*" />
+                            </Grid.ColumnDefinitions>
+                            <Frame CornerRadius="10" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" BackgroundColor="Transparent">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+                                    <controls:CustomEntry Text="{Binding Price, Mode=TwoWay}" TextColor="#6f7796" Grid.Column="1" Placeholder="Preço" Keyboard="Numeric" HorizontalTextAlignment="Start" PlaceholderColor="#6f7796" />
+                                </Grid>
+
+                            </Frame>
+                            <Frame CornerRadius="10" Grid.Column="1" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" BackgroundColor="Transparent">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+                                    <Picker BackgroundColor="Transparent" TextColor="#6f7796" SelectedItem="{Binding Currency, Mode=TwoWay}" ItemsSource="{Binding Currencies}" Grid.Column="1">
+                                    </Picker>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                        <Grid Grid.Row="2" Margin="0,20,0,0">
+                            <Frame CornerRadius="10" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" BackgroundColor="Transparent">
+                                <Grid>
+                                    <controls:CustomEntry x:Name="AddressEntry" Unfocused="VisualElement_OnUnfocused" Keyboard="Url" TextColor="#6f7796" Placeholder="Link da sua loja" HorizontalTextAlignment="Start" PlaceholderColor="#6f7796" />
+                                </Grid>
+
+                            </Frame>
+                        </Grid>
+                        <Grid Grid.Row="3" Margin="0,20,0,0">
+                            <Frame CornerRadius="10" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" BackgroundColor="Transparent">
+                                <Grid>
+                                    <WebView Source="{Binding StoreWebsite}" />
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                        <Grid Margin="0,20,0,0" Grid.Row="4">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NextCommand}" />
+                            </Grid.GestureRecognizers>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="20" />
+                            </Grid.ColumnDefinitions>
+                            <Frame Padding="0" CornerRadius="10" Grid.Column="1" BackgroundColor="Transparent" WidthRequest="300">
+                                <Grid>
+                                    <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface2" />
+                                    <Label Text="Continuar" VerticalOptions="Center" HorizontalOptions="Center" FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FFFFFFFF" />
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </Grid>
+
+                </ScrollView>
+            </Grid>
+
+        </Grid>
+    </ContentPage.Content>
+</views:MvxContentPage>

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage x:TypeArguments="viewModels:CodeVerificationViewModel" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+             xmlns:viewModels="clr-namespace:ConsumerOne.Mobile.ViewModels;assembly=ConsumerOne.Mobile"
+             xmlns:controls="clr-namespace:ConsumerOne.Mobile.Controls;assembly=ConsumerOne.Mobile"
+             xmlns:behaviors="clr-namespace:ConsumerOne.Mobile.Behaviors;assembly=ConsumerOne.Mobile"
+             xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             BackgroundColor="{StaticResource BackgroundColor}" Title="{Binding Title}"
+             x:Class="ConsumerOne.Mobile.Views.CodeVerificationView">
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView>
+                <Grid>
+                    <Grid RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="300" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="1" Margin="0,50,0,0">
+                            <Label VerticalOptions="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Texto Principal Email'}" FontFamily="HelveticaNeue#400" FontSize="25" FontAttributes="None" TextColor="#FFB8C2E0" />
+                        </Grid>
+                        <Grid Margin="0,20,0,0" Grid.Row="1" Grid.Column="1">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ResendCommand}"></TapGestureRecognizer>
+                            </Grid.GestureRecognizers>
+                            <Label VerticalOptions="Center" HorizontalOptions="Center" TextDecorations="Underline" HorizontalTextAlignment="Center" Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Não recebi'}" FontFamily="HelveticaNeue#400" FontSize="15" FontAttributes="None" TextColor="#FFB8C2E0" />
+                        </Grid>
+                        <Grid HorizontalOptions="Center" Margin="0,80,0,0" Grid.Column="1" Grid.Row="2">
+                            <controls:CustomEntry WidthRequest="100" Text="{Binding Code,Mode=TwoWay}" Keyboard="Numeric" FontSize="40" Placeholder="____" TextColor="White" MaxLength="4" VerticalOptions="Center"></controls:CustomEntry>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="0,60,0,0" Grid.Row="8">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SendCommand}" />
+                            </Grid.GestureRecognizers>
+                            <Frame Padding="0" CornerRadius="10" WidthRequest="300">
+                                <Grid>
+                                    <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface" />
+                                    <Label Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Confirmar'}" VerticalOptions="Center" HorizontalOptions="Center"
+                                           FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None"
+                                           TextColor="#FFFFFFFF" />
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </ScrollView>
+            <Grid IsVisible="{Binding IsLoading}">
+                <Grid BackgroundColor="{StaticResource BackgroundColor}" Opacity="0.8"></Grid>
+                <ActivityIndicator IsRunning="True" HorizontalOptions="Center" Color="White" VerticalOptions="Center"></ActivityIndicator>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</views:MvxContentPage>

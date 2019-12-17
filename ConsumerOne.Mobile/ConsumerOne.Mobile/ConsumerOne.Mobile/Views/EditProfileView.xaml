@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage x:TypeArguments="viewModels:EditProfileViewModel" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms" xmlns:viewModels="clr-namespace:ConsumerOne.Mobile.ViewModels;assembly=ConsumerOne.Mobile" xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms" xmlns:controls="clr-namespace:ConsumerOne.Mobile.Controls;assembly=ConsumerOne.Mobile" xmlns:forms1="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" xmlns:behaviors="clr-namespace:ConsumerOne.Mobile.Behaviors;assembly=ConsumerOne.Mobile" xmlns:converters="clr-namespace:ConsumerOne.Mobile.Converters;assembly=ConsumerOne.Mobile" x:Class="ConsumerOne.Mobile.Views.EditProfileView">
+    <ContentPage.Content>
+        <Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="30" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid BackgroundColor="Black" Grid.ColumnSpan="3" HeightRequest="75">
+                    <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface" />
+                    <Image WidthRequest="20" HorizontalOptions="StartAndExpand" Margin="20,20,0,0" VerticalOptions="Center" Source="close.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CloseCommand}"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Margin="0,20,0,0" Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Titulo'}" VerticalOptions="Center" HorizontalOptions="Center" FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FFFFFFFF" />
+                </Grid>
+                <ScrollView Grid.Row="1" Grid.Column="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid Margin="0,20,0,0" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TakePictureCommand}"></TapGestureRecognizer>
+                            </Grid.GestureRecognizers>
+                            <forms1:CachedImage Margin="30" Source="{Binding Image}" WidthRequest="97" HeightRequest="97" Aspect="AspectFill" HorizontalOptions="Center" VerticalOptions="Center" ErrorPlaceholder="{Binding DefaultImage}" LoadingPlaceholder="{Binding DefaultImage}">
+                                <forms1:CachedImage.Transformations>
+                                    <transformations:CircleTransformation></transformations:CircleTransformation>
+                                </forms1:CachedImage.Transformations>
+                            </forms1:CachedImage>
+                            <forms1:CachedImage WidthRequest="30" Margin="30,60,35,0" Source="more.png" HorizontalOptions="End">
+                                <forms1:CachedImage.Transformations>
+                                    <transformations:CircleTransformation></transformations:CircleTransformation>
+                                </forms1:CachedImage.Transformations>
+                            </forms1:CachedImage>
+                        </Grid>
+
+                        <Grid Grid.Row="1" Margin="0,20,0,0">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+                                    <controls:CustomEntry Text="{Binding Name, Mode=TwoWay}" TextColor="#6f7796" Grid.Column="1" Placeholder="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Nome'}" HorizontalTextAlignment="Center" PlaceholderColor="#6f7796" />
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                        <Grid IsVisible="{Binding IsProvider}" Grid.Row="2" Margin="0,20,0,0">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="146" HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+                                    <controls:CustomEditor Text="{Binding About, Mode=TwoWay}" TextColor="#6f7796" Grid.Column="1" Placeholder="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Sobre'}" PlaceholderColor="#6f7796" />
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                        <Grid IsVisible="{Binding IsProvider, Converter={StaticResource BooleanInverterConverter}}" Grid.Row="2" Margin="0,20,0,0">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+                                    <DatePicker Date="{Binding BirthDate, Mode=TwoWay}" MinimumDate="{Binding MinDate}" MaximumDate="{Binding MaxDate}" TextColor="#6f7796" Grid.Column="1" />
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                        <Grid IsVisible="{Binding IsProvider}" Grid.Row="3" Margin="0,20,0,0">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <controls:CustomEntry Text="{Binding Site, Mode=TwoWay}" TextColor="#6f7796" Grid.Column="1" Placeholder="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Site'}" HorizontalTextAlignment="Center" PlaceholderColor="#6f7796" />
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                        <Grid  Grid.Row="4" Margin="0,20,0,0">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <controls:CustomEntry Text="{Binding Email, Mode=TwoWay}" TextColor="#6f7796" Grid.Column="1" Placeholder="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Email'}" HorizontalTextAlignment="Center" PlaceholderColor="#6f7796" />
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                        <Grid Grid.Row="5" Margin="0,20,0,0">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <controls:CustomEntry Text="{Binding Phone, Mode=TwoWay}" TextColor="#6f7796" Grid.Column="1" Placeholder="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Telefone'}" Keyboard="Numeric" HorizontalTextAlignment="Center" PlaceholderColor="#6f7796">
+                                        <controls:CustomEntry.Behaviors>
+                                            <behaviors:MaskedBehavior Mask="(XX)XXXXX-XXXX"></behaviors:MaskedBehavior>
+                                        </controls:CustomEntry.Behaviors>
+                                    </controls:CustomEntry>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                        <Grid IsVisible="{Binding IsProvider}" Grid.Row="6" Margin="0,20,0,0">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <controls:CustomEntry Text="{Binding BusinessPhone, Mode=TwoWay}" TextColor="#6f7796" Grid.Column="1" Placeholder="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Telefone Negócio'}" Keyboard="Numeric" HorizontalTextAlignment="Center" PlaceholderColor="#6f7796">
+                                        <controls:CustomEntry.Behaviors>
+                                            <behaviors:MaskedBehavior Mask="(XX)XXXX-XXXX"></behaviors:MaskedBehavior>
+                                        </controls:CustomEntry.Behaviors>
+                                    </controls:CustomEntry>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                        <Grid IsVisible="{Binding IsProvider}" Grid.Row="7" Margin="0,20,0,0">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <controls:CustomEntry Text="{Binding FullAddress, Mode=TwoWay}" TextColor="#6f7796" Grid.Column="1" Placeholder="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Endereço'}" HorizontalTextAlignment="Center" PlaceholderColor="#6f7796">
+                                    </controls:CustomEntry>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                        <Grid IsVisible="{Binding IsProvider}" Grid.Row="8" Margin="20,20,20,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40*"></ColumnDefinition>
+                                <ColumnDefinition Width="60*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="10" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="10" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <controls:CustomEntry Text="{Binding AddressNumber, Mode=TwoWay}" TextColor="#6f7796" Grid.Column="1" Placeholder="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Numero'}" HorizontalTextAlignment="Center" PlaceholderColor="#6f7796">
+                                    </controls:CustomEntry>
+                                </Grid>
+                            </Frame>
+                            <Frame Grid.Column="1" CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="10" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="10" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <controls:CustomEntry Text="{Binding AddressAddon, Mode=TwoWay}" TextColor="#6f7796" Grid.Column="1" Placeholder="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Complemento'}" HorizontalTextAlignment="Center" PlaceholderColor="#6f7796">
+
+                                    </controls:CustomEntry>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                        <Grid IsVisible="{Binding IsProvider}" Grid.Row="9" Margin="0,20,0,0">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <controls:CustomEntry Text="{Binding Cep, Mode=TwoWay}" TextColor="#6f7796" Grid.Column="1" Placeholder="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Cep'}" Keyboard="Numeric" HorizontalTextAlignment="Center" PlaceholderColor="#6f7796">
+                                        <controls:CustomEntry.Behaviors>
+                                            <behaviors:MaskedBehavior Mask="XXXXX-XXX"></behaviors:MaskedBehavior>
+                                        </controls:CustomEntry.Behaviors>
+                                    </controls:CustomEntry>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                        <Grid IsVisible="{Binding IsProvider}" Grid.Row="10" Margin="0,20,0,0">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <controls:CustomEntry Text="{Binding City, Mode=TwoWay}" TextColor="#6f7796" Grid.Column="1" Placeholder="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Cidade'}" HorizontalTextAlignment="Center" PlaceholderColor="#6f7796">
+                                    </controls:CustomEntry>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                        <Grid IsVisible="{Binding IsProvider}" Grid.Row="11" Margin="0,20,0,0">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <controls:CustomEntry Text="{Binding State, Mode=TwoWay}" TextColor="#6f7796" Grid.Column="1" Placeholder="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Estado'}" HorizontalTextAlignment="Center" PlaceholderColor="#6f7796">
+                                    </controls:CustomEntry>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                        <Grid IsVisible="{Binding IsProvider}" Grid.Row="12" Margin="0,20,0,0">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <controls:CustomEntry Text="{Binding Country, Mode=TwoWay}" TextColor="#6f7796" Grid.Column="1" Placeholder="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='País'}" HorizontalTextAlignment="Center" PlaceholderColor="#6f7796">
+                                    </controls:CustomEntry>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                        <Grid IsVisible="{Binding IsProvider}" Grid.Row="13" Margin="0,20,0,0">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Picker Grid.Column="1" HorizontalOptions="FillAndExpand" ItemsSource="{Binding Languages}" SelectedItem="{Binding ChosenLanguage, Mode=TwoWay}"></Picker>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                        <Grid Margin="0,20,0,0" HeightRequest="46" Grid.Row="14">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SaveCommand}" />
+                            </Grid.GestureRecognizers>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="20" />
+                            </Grid.ColumnDefinitions>
+                            <Frame Padding="0" CornerRadius="10" Grid.Column="1" BackgroundColor="Transparent" WidthRequest="300">
+                                <Grid>
+                                    <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface2" />
+                                    <Label Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Salvar'}" VerticalOptions="Center" HorizontalOptions="Center" FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FFFFFFFF" />
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                        <Grid Grid.Row="15" Margin="0,20,0,40">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ChangePasswordCommand}" />
+                            </Grid.GestureRecognizers>
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Alterar senha'}" TextColor="#6f7796" FontSize="18" VerticalOptions="Center" Grid.Column="1" HorizontalTextAlignment="Center">
+                                    </Label>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </Grid>
+                </ScrollView>
+            </Grid>
+            <Grid IsVisible="{Binding IsLoading}">
+                <Grid BackgroundColor="{StaticResource BackgroundColor}" Opacity="0.8"></Grid>
+                <ActivityIndicator IsRunning="True" HorizontalOptions="Center" Color="White" VerticalOptions="Center"></ActivityIndicator>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</views:MvxContentPage>

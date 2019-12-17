@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage x:TypeArguments="viewModels:UseTermsViewModel" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+             xmlns:viewModels="clr-namespace:ConsumerOne.Mobile.ViewModels;assembly=ConsumerOne.Mobile"
+             xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             xmlns:forms1="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:forms2="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             x:Class="ConsumerOne.Mobile.Views.UseTermsView">
+    <ContentPage.Content>
+        <Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid BackgroundColor="Black" HeightRequest="75">
+                    <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface" />
+                    <Image WidthRequest="20" HorizontalOptions="StartAndExpand" Margin="20,20,0,0" VerticalOptions="Center" Source="close.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CloseCommand}"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Margin="0,20,0,0" Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Titulo'}" VerticalOptions="Center" HorizontalOptions="Center"
+                           FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FFFFFFFF" />
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="90"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <ScrollView Padding="30">
+                        <Label Text="{Binding Terms}"></Label>
+                    </ScrollView>
+                    <Grid Margin="0,20,0,0" HeightRequest="46" Grid.Row="1">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CloseCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="20" />
+                        </Grid.ColumnDefinitions>
+                        <Frame Padding="0" CornerRadius="10" Grid.Column="1" BackgroundColor="Transparent"
+                               WidthRequest="300">
+                            <Grid>
+                                <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface2" />
+                                <Label Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Aceitar'}" VerticalOptions="Center" HorizontalOptions="Center"
+                                       FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None"
+                                       TextColor="#FFFFFFFF" />
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid IsVisible="{Binding IsLoading}">
+                <Grid BackgroundColor="{StaticResource BackgroundColor}" Opacity="0.8"></Grid>
+                <ActivityIndicator IsRunning="True" HorizontalOptions="Center" Color="White" VerticalOptions="Center"></ActivityIndicator>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</views:MvxContentPage>

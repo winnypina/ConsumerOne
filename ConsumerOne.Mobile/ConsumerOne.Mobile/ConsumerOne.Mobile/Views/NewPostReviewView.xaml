@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<views:MvxContentPage x:TypeArguments="viewModels:NewPostReviewViewModel" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms" xmlns:viewModels="clr-namespace:ConsumerOne.Mobile.ViewModels;assembly=ConsumerOne.Mobile" xmlns:abstractions="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions" xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms" xmlns:forms1="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms" xmlns:panCardView="clr-namespace:PanCardView;assembly=PanCardView" xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView" xmlns:forms2="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" xmlns:videoPlayerControl="clr-namespace:ConsumerOne.Mobile.Controls.VideoPlayerControl;assembly=ConsumerOne.Mobile" x:Class="ConsumerOne.Mobile.Views.NewPostReviewView">
+    <Grid>
+         <Grid.Padding>
+                <OnPlatform x:TypeArguments="Thickness" Android="0,0,0,60"></OnPlatform>
+            </Grid.Padding>
+        <Grid RowSpacing="40">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid BackgroundColor="Black" HeightRequest="75">
+                <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface" />
+                    <Label Text="Revisar publicação" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,20,0,0"
+                               FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FFFFFFFF" />
+            </Grid>
+            <ScrollView Grid.Row="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label Margin="0,0,0,30" Text="Revise sua publicação" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="HelveticaNeue#400" FontSize="25" FontAttributes="None" TextColor="#FF6F7796" />
+                    <Grid Grid.Row="1" RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid BackgroundColor="#6f7796"></Grid>
+                        <Grid Grid.Row="1" Margin="0,10,0,10" RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="50" />
+                            </Grid.ColumnDefinitions>
+                            <forms2:CachedImage Source="{Binding UserPicture}" WidthRequest="40" Aspect="AspectFill" HorizontalOptions="Center" VerticalOptions="Center" ErrorPlaceholder="defaultProvider.png" LoadingPlaceholder="defaultProvider.png">
+                                <forms2:CachedImage.Transformations>
+                                    <transformations:CircleTransformation></transformations:CircleTransformation>
+                                </forms2:CachedImage.Transformations>
+                            </forms2:CachedImage>
+                            <StackLayout Grid.Column="1">
+                                <Label Text="{Binding Username}" FontFamily="HelveticaNeue#400" FontSize="24" FontAttributes="None" TextColor="#FF313952" />
+                                <Label Text="{Binding Address}" FontFamily="HelveticaNeue#400" FontSize="16" FontAttributes="None" TextColor="#FF6F7796" />
+                            </StackLayout>
+                            <forms1:ZXingBarcodeImageView Grid.Column="2" BarcodeValue="{Binding PostId}" />
+                        </Grid>
+                        <Grid Grid.Row="2" RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60" />
+                                <RowDefinition Height="250" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="50" />
+                            </Grid.RowDefinitions>
+                            <!--<abstractions:CarouselViewControl Grid.RowSpan="4" x:Name="carousel"
+                                                              ItemsSource="{Binding Images}"
+                                                              ShowArrows="true"
+                                                              ShowIndicators="true"
+                                                              Orientation="Horizontal" />-->
+                            <panCardView:CarouselView Grid.RowSpan="4" IsVisible="{Binding HasImage}" ItemsSource="{Binding Images}">
+                                <panCardView:CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ContentView>
+                                            <Image VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill" Source="{Binding .}">
+                                            </Image>
+                                        </ContentView>
+                                    </DataTemplate>
+                                </panCardView:CarouselView.ItemTemplate>
+                                <controls:IndicatorsControl />
+                            </panCardView:CarouselView>
+                            <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurfaceTop" Grid.Row="0" />
+                            <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurfaceBottom" Grid.Row="2" Grid.RowSpan="2" />
+                            <Label Margin="20,10,0,0" Grid.Row="0" HorizontalOptions="Start" Text="{Binding Price}" FontFamily="HelveticaNeue#400" FontSize="25" FontAttributes="None" TextColor="#FFFFFFFF" />
+                            <Label Margin="0,10,20,0" Grid.Row="0" HorizontalOptions="End" Text="{Binding Distance, StringFormat='{0:N1} km'}" FontFamily="HelveticaNeue#400" FontSize="14" FontAttributes="None" TextColor="#FFFFFFFF" />
+                            <StackLayout Grid.Row="2">
+                                <Label Margin="20,0,0,0" Text="{Binding Title}" FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FFFFFFFF" />
+                            </StackLayout>
+                        </Grid>
+                        <Frame HeightRequest="40" Grid.Row="3" BackgroundColor="#FF313952">
+                            <Grid>
+                                <Label VerticalOptions="Center" Margin="20,0,0,0" HorizontalOptions="Start" Text="Comprar Agora" FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FFFFFFFF" />
+                            </Grid>
+                        </Frame>
+                        <Label Grid.Row="4" HorizontalTextAlignment="Center" HeightRequest="100" HorizontalOptions="Center" VerticalOptions="Center" VerticalTextAlignment="Center" Text="{Binding Description}" FontFamily="HelveticaNeue#400" FontSize="15" FontAttributes="None" TextColor="#FF6F7796" />
+                        <Grid Margin="0,20,0,0" Grid.Row="5">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding PublishCommand}"></TapGestureRecognizer>
+                            </Grid.GestureRecognizers>
+                            <Frame Padding="0" CornerRadius="10" WidthRequest="300">
+                                <Grid>
+                                    <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface" />
+                                    <Label Text="Publicar" VerticalOptions="Center" HorizontalOptions="Center" FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FFFFFFFF" />
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                        <Label Margin="20" Grid.Row="6" Text="Quero editar novamente" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FF6F7796">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EditAgainCommand}"></TapGestureRecognizer>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                </Grid>
+            </ScrollView>
+        </Grid>
+
+        <Grid IsVisible="{Binding IsLoading}">
+            <Grid BackgroundColor="{StaticResource BackgroundColor}" Opacity="0.8" />
+            <ActivityIndicator IsRunning="True" HorizontalOptions="Center" Color="White" VerticalOptions="Center" />
+        </Grid>
+    </Grid>
+</views:MvxContentPage>

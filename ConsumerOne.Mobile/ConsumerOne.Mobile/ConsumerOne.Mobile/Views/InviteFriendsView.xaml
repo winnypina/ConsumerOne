@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage x:TypeArguments="viewModels:InviteFriendsViewModel" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+             xmlns:viewModels="clr-namespace:ConsumerOne.Mobile.ViewModels;assembly=ConsumerOne.Mobile"
+             xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             xmlns:controls="clr-namespace:ConsumerOne.Mobile.Controls;assembly=ConsumerOne.Mobile"
+             xmlns:forms1="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:multiSelectListView="clr-namespace:Xamarin.Forms.MultiSelectListView;assembly=Xamarin.Forms.MultiSelectListView"
+             x:Class="ConsumerOne.Mobile.Views.InviteFriendsView">
+    <ContentPage.Content>
+        <Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="1" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid BackgroundColor="Black" Grid.ColumnSpan="3" HeightRequest="75">
+                    <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface" />
+                    <Image WidthRequest="20" HorizontalOptions="StartAndExpand" Margin="20,20,0,0" VerticalOptions="Center" Source="close.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CloseCommand}"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Margin="0,20,0,0" Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Titulo'}" VerticalOptions="Center" HorizontalOptions="Center"
+                               FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FFFFFFFF" />
+                </Grid>
+                <ListView Grid.Row="1" Grid.Column="1" RowHeight="80" ItemsSource="{Binding Contacts}" multiSelectListView:MultiSelect.Enable="true">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <multiSelectListView:SelectableCell x:Name="SelectableCell">
+
+                                <multiSelectListView:SelectableCell.CheckView>
+                                    <Image Source="select.png" WidthRequest="30" HeightRequest="30"></Image>
+                                </multiSelectListView:SelectableCell.CheckView>
+
+                                <multiSelectListView:SelectableCell.DataView>
+                                  <Grid>
+                                      <Grid.ColumnDefinitions>
+                                          <ColumnDefinition Width="50"></ColumnDefinition>
+                                          <ColumnDefinition Width="*"></ColumnDefinition>
+                                      </Grid.ColumnDefinitions>
+                                      <forms1:CachedImage Source="{Binding PhotoUri}" WidthRequest="30" ErrorPlaceholder="defaultUser.png" LoadingPlaceholder="defaultUser.png">
+                                          <forms1:CachedImage.Transformations>
+                                              <transformations:CircleTransformation></transformations:CircleTransformation>
+                                          </forms1:CachedImage.Transformations>
+                                      </forms1:CachedImage>
+                                      <Label Grid.Column="1" Margin="10,0,0,0" VerticalOptions="Center" FontSize="22" Text="{Binding Name}" TextColor="#313952"></Label>
+                                  </Grid>
+                                </multiSelectListView:SelectableCell.DataView>
+
+                            </multiSelectListView:SelectableCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Grid Margin="0,20,0,20" HeightRequest="46" Grid.Row="2" Grid.Column="1" >
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding InviteCommand}" />
+                    </Grid.GestureRecognizers>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                    </Grid.ColumnDefinitions>
+                    <Frame Padding="0" CornerRadius="10" Grid.Column="1" BackgroundColor="Transparent"
+                           WidthRequest="300">
+                        <Grid>
+                            <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface2" />
+                            <Label Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Convidar'}" VerticalOptions="Center" HorizontalOptions="Center"
+                                   FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None"
+                                   TextColor="#FFFFFFFF" />
+                        </Grid>
+                    </Frame>
+                </Grid>
+            </Grid>
+            <Grid IsVisible="{Binding IsLoading}">
+                <Grid BackgroundColor="{StaticResource BackgroundColor}" Opacity="0.8"></Grid>
+                <ActivityIndicator IsRunning="True" HorizontalOptions="Center" Color="White" VerticalOptions="Center"></ActivityIndicator>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</views:MvxContentPage>

@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage 
+                      xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                      xmlns:viewModels="clr-namespace:ConsumerOne.Mobile.ViewModels;assembly=ConsumerOne.Mobile"
+                      xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+                      xmlns:forms1="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                      xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                      xmlns:forms2="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+                      x:Class="ConsumerOne.Mobile.Views.PostCodeView">
+    <ContentPage.Content>
+        <Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid BackgroundColor="Black" HeightRequest="75">
+                    <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface" />
+                    <Image WidthRequest="20" HorizontalOptions="StartAndExpand" Margin="20,20,0,0" VerticalOptions="Center" Source="close.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CloseCommand}"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Margin="0,20,0,0" Text="QR Code" VerticalOptions="Center" HorizontalOptions="Center"
+                           FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FFFFFFFF" />
+                </Grid>
+                <Frame Grid.Row="1"
+                       Margin="30"
+                       CornerRadius="30"
+                       BorderColor="#b8c2e0"
+                       Padding="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="90"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="90"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Padding="20"
+                                      Margin="0,10,0,10"
+                                      RowSpacing="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <forms1:CachedImage Source="{Binding UserImage}"
+                                                       WidthRequest="40"
+                                                       HeightRequest="40"
+                                                       Aspect="AspectFill"
+                                                       HorizontalOptions="Center"
+                                                       VerticalOptions="Center"
+                                                       ErrorPlaceholder="defaultProvider.png"
+                                                       LoadingPlaceholder="defaultProvider.png">
+                                        <forms1:CachedImage.Transformations>
+                                            <transformations:CircleTransformation />
+                                        </forms1:CachedImage.Transformations>
+                                    </forms1:CachedImage>
+                                    <StackLayout Grid.Column="1">
+                                        <Label Text="{Binding Username}"
+                                               FontFamily="HelveticaNeue#400"
+                                               FontSize="20"
+                                               FontAttributes="None"
+                                               TextColor="#FF313952" />
+                                        <Label Text="{Binding UserAddress}"
+                                               FontFamily="HelveticaNeue#400"
+                                               FontSize="12"
+                                               FontAttributes="None"
+                                               TextColor="#FF6F7796" />
+                                    </StackLayout>
+                                </Grid>
+                        <Grid VerticalOptions="Center" Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="150"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Padding="20" Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="30"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="share.png"
+                                       Grid.Column="0"
+                                       WidthRequest="30"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="End">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ShareImageCommand}"></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Grid Grid.Column="1">
+                                    <forms1:CachedImage 
+                                                        Source="{Binding QrCodeImage}"
+                                                        WidthRequest="150"
+                                                        HeightRequest="150"
+                                                        Aspect="AspectFill"
+                                                        HorizontalOptions="Center">
+                                    </forms1:CachedImage>
+                                </Grid>
+                                <Image Grid.Column="2"
+                                       Source="download.png"
+                                       WidthRequest="30"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SaveImageCommand}"></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                             <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface" />
+                           <Label TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding PostTitle}"></Label>
+                        </Grid>
+                    </Grid>
+                </Frame>
+            </Grid>
+            <Grid IsVisible="{Binding IsLoading}">
+                <Grid BackgroundColor="{StaticResource BackgroundColor}"
+                      Opacity="0.8"></Grid>
+                <ActivityIndicator IsRunning="True"
+                                   HorizontalOptions="Center"
+                                   Color="White"
+                                   VerticalOptions="Center"></ActivityIndicator>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</views:MvxContentPage>

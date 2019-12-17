@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:ConsumerOne.Mobile.Converters;assembly=ConsumerOne.Mobile"
+             x:Class="ConsumerOne.Mobile.App">
+    <Application.Resources>
+        <Color x:Key="BackgroundColor">#313952</Color>
+        <converters:TranslatedTextConverter x:Key="TranslatedTextConverter"></converters:TranslatedTextConverter>
+        <converters:BooleanInverterConverter x:Key="BooleanInverterConverter"></converters:BooleanInverterConverter>
+        <converters:VisibleIfNotNullConverter x:Key="VisibleIfNotNullConverter"></converters:VisibleIfNotNullConverter>
+        <converters:HigherThenVisibilityConverter x:Key="HigherThenVisibilityConverter"></converters:HigherThenVisibilityConverter>
+        <Style TargetType="Frame">
+            <Style.Setters>
+                <Setter Property="HasShadow" Value="False" />
+            </Style.Setters>
+        </Style>
+    </Application.Resources>
+</Application>

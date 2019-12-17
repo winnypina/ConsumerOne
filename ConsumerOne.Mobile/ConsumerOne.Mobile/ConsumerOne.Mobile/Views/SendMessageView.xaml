@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<views:MvxContentPage xmlns:forms1="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                      xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                      xmlns:controls="clr-namespace:ConsumerOne.Mobile.Controls"
+                      xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+                      xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                      xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      x:Class="ConsumerOne.Mobile.Views.SendMessageView">
+    <ContentPage.Content>
+        <Grid x:Name="MainGrid">
+            <Grid.Padding>
+                <OnPlatform x:TypeArguments="Thickness" Android="0,0,0,60"></OnPlatform>
+            </Grid.Padding>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid HeightRequest="75">
+                    <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface" />
+                    <Label Margin="0,20,0,0" Text="Mensagem" VerticalOptions="Center" HorizontalOptions="Center"
+                           FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FFFFFFFF" />
+                </Grid>
+                <ListView SelectionMode="None" Grid.Row="1" SeparatorVisibility="None" ItemsSource="{Binding Messages}" IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      CachingStrategy="RecycleElement" IsRefreshing="{Binding IsLoading}"
+                      HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="30"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <forms1:CachedImage Margin="5" Source="{Binding UserPicture}" WidthRequest="40" HeightRequest="40" Grid.RowSpan="2"
+                                                       Aspect="AspectFill" HorizontalOptions="Center"
+                                                       VerticalOptions="StartAndExpand" ErrorPlaceholder="defaultProvider.png"
+                                                       LoadingPlaceholder="defaultProvider.png">
+                                        <forms1:CachedImage.Transformations>
+                                            <transformations:CircleTransformation />
+                                        </forms1:CachedImage.Transformations>
+                                    </forms1:CachedImage>
+                                    <Label Grid.Column="1" Grid.Row="0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding FromName, Mode=OneTime}" TextColor="#313952" FontSize="22"></Span>
+                                                <Span Text=" "></Span>
+                                                <Span Text="{Binding Message, Mode=OneTime}" TextColor="#6f7796" FontSize="20"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label VerticalOptions="End" Grid.Column="2" Text="{Binding Since}" TextColor="#313952"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Grid HeightRequest="55" Grid.Row="2">
+                    <Frame Margin="5" CornerRadius="10" Padding="0" BorderColor="#b8c2e0"
+                           HeightRequest="46"
+                           HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="20" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="balloon.png" WidthRequest="20" VerticalOptions="Center" HorizontalOptions="Center"></Image>
+                            <controls:CustomEntry Text="{Binding Message, Mode=TwoWay}" TextColor="#6f7796"
+                                                  Completed="Entry_OnCompleted" HorizontalOptions="FillAndExpand"
+                                                  Grid.Column="1" Placeholder="Digite uma mensagem"
+                                                  HorizontalTextAlignment="Start"
+                                                  PlaceholderColor="#6f7796" />
+                            <Image Grid.Column="1" Grid.ColumnSpan="2" Source="send.png" IsVisible="{Binding CanPublish}" Margin="5" WidthRequest="20" VerticalOptions="Center" HorizontalOptions="End">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding CreateCommentCommand}"></TapGestureRecognizer>
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </Grid>
+                    </Frame>
+                </Grid>
+            </Grid>
+            <Grid IsVisible="{Binding IsLoading}">
+                <Grid BackgroundColor="{StaticResource BackgroundColor}" Opacity="0.8" />
+                <ActivityIndicator IsRunning="True" HorizontalOptions="Center" Color="White"
+                                   VerticalOptions="Center" />
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</views:MvxContentPage>

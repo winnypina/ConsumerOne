@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<views:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                      xmlns:viewModels="clr-namespace:ConsumerOne.Mobile.ViewModels;assembly=ConsumerOne.Mobile"
+                      xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+                      xmlns:controls="clr-namespace:ConsumerOne.Mobile.Controls;assembly=ConsumerOne.Mobile"
+                      x:Class="ConsumerOne.Mobile.Views.EditPostView">
+    <ContentPage.Content>
+        <Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="30" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.ColumnSpan="3" HeightRequest="75">
+                        <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface" />
+                        <Label Text="Promover" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,20,0,0"
+                               FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FFFFFFFF" />
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Margin="0,20,0,0" Grid.Row="1" Text="Promova seu negócio!" VerticalOptions="Center"
+                               HorizontalOptions="Center" HorizontalTextAlignment="Center"
+                               FontFamily="HelveticaNeue#400" FontSize="25" FontAttributes="None" TextColor="#FF6F7796" />
+                        <Grid Grid.Row="2" Margin="0,20,0,0">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0"
+                                   HeightRequest="46"
+                                   HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+                                    <controls:CustomEntry MaxLength="50" Text="{Binding Title, Mode=TwoWay}" TextColor="#6f7796"
+                                                          Grid.Column="1" Placeholder="Título"
+                                                          HorizontalTextAlignment="Start" Keyboard="Text"
+                                                          PlaceholderColor="#6f7796" />
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                        <Grid Grid.Row="3" Margin="0,20,0,0">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0"
+                                   HeightRequest="200"
+                                   HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+                                    <controls:CustomEditor BackgroundColor="Transparent" MaxLength="200" Text="{Binding Description, Mode=TwoWay}" Keyboard="Text"
+                                                           TextColor="#6f7796" Grid.Column="1" Placeholder="Descrição"
+                                                           PlaceholderColor="#6f7796" />
+                                </Grid>
+
+                            </Frame>
+                        </Grid>
+                        <Grid Grid.Row="4" Margin="0,20,0,0">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0"
+                                   HeightRequest="46"
+                                   HorizontalOptions="Center" BackgroundColor="Transparent">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+                                    <controls:CustomEntry Text="{Binding Tags, Mode=TwoWay}" TextColor="#6f7796"
+                                                          Grid.Column="1" Placeholder="Palavras chave"
+                                                          HorizontalTextAlignment="Start"
+                                                          PlaceholderColor="#6f7796" />
+                                </Grid>
+
+                            </Frame>
+                        </Grid>
+                        <Grid Margin="0,20,0,0" HeightRequest="46" Grid.Row="5">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NextCommand}" />
+                            </Grid.GestureRecognizers>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="20" />
+                            </Grid.ColumnDefinitions>
+                            <Frame Padding="0" CornerRadius="10" Grid.Column="1" BackgroundColor="Transparent"
+                                   WidthRequest="300">
+                                <Grid>
+                                    <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface2" />
+                                    <Label Text="Continuar" VerticalOptions="Center" HorizontalOptions="Center"
+                                           FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None"
+                                           TextColor="#FFFFFFFF" />
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </Grid>
+                </Grid>
+        </Grid>
+    </ContentPage.Content>
+</views:MvxContentPage>

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage x:TypeArguments="viewModels:ChooseSigningViewModel" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+             xmlns:viewModels="clr-namespace:ConsumerOne.Mobile.ViewModels;assembly=ConsumerOne.Mobile"
+             xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+                      BackgroundColor="{StaticResource BackgroundColor}"
+             x:Class="ConsumerOne.Mobile.Views.ChooseSigningView">
+    <Grid>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Margin="0,80,0,0" Grid.ColumnSpan="3">
+                <Image Source="logo.png" VerticalOptions="Center" HorizontalOptions="Center" />
+            </Grid>
+            <Grid Margin="0,40,0,0" Grid.Row="1" Grid.Column="1">
+                <Label Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Texto Principal'}"
+                           VerticalOptions="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"
+                           FontFamily="HelveticaNeue#400" FontSize="15" FontAttributes="None" TextColor="#FFB8C2E0" />
+            </Grid>
+            <Grid  Margin="0,50,0,0" Grid.Row="2" Grid.Column="1" HeightRequest="46" WidthRequest="100">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SigningCommand}"></TapGestureRecognizer>
+                </Grid.GestureRecognizers>
+                <Frame Padding="0" CornerRadius="10" WidthRequest="300">
+                    <Grid>
+                        <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface"></forms:SKCanvasView>
+                        <Label Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Login'}" VerticalOptions="Center" HorizontalOptions="Center" FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FFFFFFFF" />
+                    </Grid>
+                </Frame>
+            </Grid>
+            <Grid Margin="0,50,0,0" HeightRequest="46" Grid.Row="3" Grid.Column="1" WidthRequest="100">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding LoginWithFacebookCommand}"></TapGestureRecognizer>
+                </Grid.GestureRecognizers>
+                <Frame Padding="0" CornerRadius="10" WidthRequest="300">
+                    <Grid>
+                        <Grid BackgroundColor="#3b5998"></Grid>
+                        <Label Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Facebook'}" VerticalOptions="Center" HorizontalOptions="Center" FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FFFFFFFF" />
+                    </Grid>
+                </Frame>
+            </Grid>
+        </Grid>
+        <Grid IsVisible="{Binding IsLoading}">
+            <Grid BackgroundColor="{StaticResource BackgroundColor}" Opacity="0.8" />
+            <ActivityIndicator IsRunning="True" HorizontalOptions="Center" Color="White"
+                               VerticalOptions="Center" />
+        </Grid>
+    </Grid>
+</views:MvxContentPage>

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<views:MvxContentPage x:TypeArguments="viewModels:FriendsViewModel" xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                      xmlns:viewModels="clr-namespace:ConsumerOne.Mobile.ViewModels;assembly=ConsumerOne.Mobile"
+                      xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+                      xmlns:controls="clr-namespace:ConsumerOne.Mobile.Controls;assembly=ConsumerOne.Mobile"
+                      xmlns:forms1="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                      xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                      x:Class="ConsumerOne.Mobile.Views.FriendView">
+    <ContentPage.Content>
+        <Grid x:Name="MainGrid">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid HeightRequest="55">
+                    <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface" />
+                    <Label Text="{Binding Title}" VerticalOptions="Center" HorizontalOptions="Center"
+                           FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FFFFFFFF" />
+                </Grid>
+                <Grid Margin="0,10,0,0" Grid.Row="1" Padding="20">
+                    <Frame CornerRadius="10" Padding="0" BorderColor="#b8c2e0"
+                       HeightRequest="46" HasShadow="False">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="20" />
+                            </Grid.ColumnDefinitions>
+                            <controls:CustomEntry Text="{Binding Term, Mode=TwoWay}" FontSize="15" TextColor="#6f7796"
+                                              Grid.Column="1" Placeholder="Busque por nome"
+                                              HorizontalTextAlignment="Center"
+                                              PlaceholderColor="#6f7796" />
+                        </Grid>
+                    </Frame>
+                </Grid>
+                <ListView SelectionMode="None" Margin="10,20,0,0" Grid.Row="2" ItemsSource="{Binding People}" HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="10">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.SelectCommand, Source={x:Reference MainGrid}}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                    </Grid.GestureRecognizers>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <forms1:CachedImage Source="{Binding UserPicture}" WidthRequest="40"
+                                                        Aspect="AspectFill" HorizontalOptions="Center"
+                                                        VerticalOptions="Center" ErrorPlaceholder="defaultProvider.png"
+                                                        LoadingPlaceholder="defaultProvider.png">
+                                        <forms1:CachedImage.Transformations>
+                                            <transformations:CircleTransformation />
+                                        </forms1:CachedImage.Transformations>
+                                    </forms1:CachedImage>
+                                    <Label TextColor="#313952" Margin="20,0,0,0" VerticalOptions="Center" Text="{Binding Name}" FontSize="22" Grid.Column="1" Grid.Row="0"></Label>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+            <Grid IsVisible="{Binding IsLoading}">
+                <Grid BackgroundColor="{StaticResource BackgroundColor}" Opacity="0.8"></Grid>
+                <ActivityIndicator IsRunning="True" HorizontalOptions="Center" Color="White" VerticalOptions="Center"></ActivityIndicator>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</views:MvxContentPage>

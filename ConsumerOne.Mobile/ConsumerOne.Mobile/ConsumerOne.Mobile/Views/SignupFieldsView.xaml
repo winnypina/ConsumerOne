@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<views:MvxContentPage x:TypeArguments="viewModels:SignupFieldsViewModel" xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                      xmlns:viewModels="clr-namespace:ConsumerOne.Mobile.ViewModels;assembly=ConsumerOne.Mobile"
+                      xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+                      xmlns:controls="clr-namespace:ConsumerOne.Mobile.Controls;assembly=ConsumerOne.Mobile"
+                      xmlns:behaviors="clr-namespace:ConsumerOne.Mobile.Behaviors;assembly=ConsumerOne.Mobile"
+                      xmlns:forms1="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                      xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                      BackgroundColor="{StaticResource BackgroundColor}"
+                      x:Class="ConsumerOne.Mobile.Views.SignupFieldsView">
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView>
+                <Grid>
+                    <Grid RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="300" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="1" Margin="0,50,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0" IsVisible="{Binding IsPhone}">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ChangeModeCommand}" />
+                                </StackLayout.GestureRecognizers>
+                                <Label Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Telefone'}" FontSize="20" FontAttributes="None" TextColor="#75c6ff"
+                                       HorizontalOptions="Center" />
+                                <Grid HorizontalOptions="Center" BackgroundColor="#75c6ff" WidthRequest="80"
+                                      HeightRequest="2" />
+                            </StackLayout>
+                            <StackLayout Grid.Column="0" IsVisible="{Binding IsEmail}">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ChangeModeCommand}" />
+                                </StackLayout.GestureRecognizers>
+                                <Label Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Telefone'}" FontSize="20" FontAttributes="None" TextColor="White"
+                                       HorizontalOptions="Center" />
+                            </StackLayout>
+                            <StackLayout Grid.Column="1" IsVisible="{Binding IsEmail}">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ChangeModeCommand}" />
+                                </StackLayout.GestureRecognizers>
+                                <Label Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Email'}" FontSize="20" FontAttributes="None" TextColor="#75c6ff"
+                                       HorizontalOptions="Center" />
+                                <Grid HorizontalOptions="Center" BackgroundColor="#75c6ff" WidthRequest="80"
+                                      HeightRequest="2" />
+                            </StackLayout>
+                            <StackLayout Grid.Column="1" IsVisible="{Binding IsPhone}">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ChangeModeCommand}" />
+                                </StackLayout.GestureRecognizers>
+                                <Label Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Email'}" FontSize="20" FontAttributes="None" TextColor="White"
+                                       HorizontalOptions="Center" />
+                            </StackLayout>
+                        </Grid>
+                        <Grid Margin="0,20,0,0" Grid.Row="1" Grid.Column="1"  MinimumHeightRequest="80">
+                            <Label Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Texto Principal'}" VerticalOptions="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"
+                                   FontFamily="HelveticaNeue#400" FontSize="15" FontAttributes="None"
+                                   TextColor="#FFB8C2E0" />
+                        </Grid>
+                        <Grid Grid.Row="3" Grid.Column="1" Margin="0,20,0,0">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TakePictureCommand}" />
+                            </Grid.GestureRecognizers>
+                            <forms1:CachedImage Margin="30" IsVisible="{Binding Image, Converter={StaticResource VisibleIfNotNullConverter}, ConverterParameter='i'}" Source="{Binding DefaultImage}" WidthRequest="97" HeightRequest="97" Aspect="AspectFill" HorizontalOptions="Center" VerticalOptions="Center" ErrorPlaceholder="{Binding DefaultImage}" LoadingPlaceholder="{Binding DefaultImage}">
+
+                            </forms1:CachedImage>
+                            <forms1:CachedImage Margin="30" IsVisible="{Binding Image, Converter={StaticResource VisibleIfNotNullConverter}}" Source="{Binding Image}" WidthRequest="97" HeightRequest="97" Aspect="AspectFill" HorizontalOptions="Center" VerticalOptions="Center">
+                                <forms1:CachedImage.Transformations>
+                                    <transformations:CircleTransformation></transformations:CircleTransformation>
+                                </forms1:CachedImage.Transformations>
+                            </forms1:CachedImage>
+
+                        </Grid>
+                        <Grid Grid.Row="4" Grid.Column="1" Margin="0,20,0,0">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="White"
+                                   HeightRequest="46"
+                                   HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+                                    <controls:CustomEntry Text="{Binding Name, Mode=TwoWay}" TextColor="White"
+                                                          Grid.Column="1" Placeholder="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Nome'}"
+                                                          HorizontalTextAlignment="Center"
+                                                          PlaceholderColor="White" />
+                                </Grid>
+
+                            </Frame>
+
+                        </Grid>
+                        <Grid IsVisible="{Binding IsPhone}" Margin="0,20,0,0" Grid.Row="5" Grid.Column="1" HeightRequest="46" WidthRequest="100">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="White"
+                                   HeightRequest="46"
+                                   HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+                                    <controls:CustomEntry  Text="{Binding Phone, Mode=TwoWay}" TextColor="White"
+                                                          Grid.Column="1" Placeholder="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Telefone'}"
+                                                          HorizontalTextAlignment="Center" Keyboard="Numeric"
+                                                          PlaceholderColor="White">
+                                        <controls:CustomEntry.Behaviors>
+                                            <behaviors:MaskedBehavior Mask="(XX)XXXXX-XXXX"></behaviors:MaskedBehavior>
+                                        </controls:CustomEntry.Behaviors>
+                                    </controls:CustomEntry>
+                                </Grid>
+
+                            </Frame>
+
+                        </Grid>
+                        <Grid IsVisible="{Binding IsEmail}"  Margin="0,20,0,0" Grid.Row="5" Grid.Column="1" HeightRequest="46" WidthRequest="100">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="White"
+                                   HeightRequest="46"
+                                   HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+                                    <controls:CustomEntry Keyboard="Email" Text="{Binding Email, Mode=TwoWay}" TextColor="White"
+                                                          Grid.Column="1" Placeholder="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Email'}"
+                                                          HorizontalTextAlignment="Center"
+                                                          PlaceholderColor="White">
+                                    </controls:CustomEntry>
+                                </Grid>
+
+                            </Frame>
+
+                        </Grid>
+                        <Grid Margin="0,20,0,0" Grid.Row="6" Grid.Column="1" HeightRequest="46" WidthRequest="100">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="White"
+                                   HeightRequest="46"
+                                   HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+                                    <controls:CustomEntry Text="{Binding Password, Mode=TwoWay}" TextColor="White"
+                                                          IsPassword="True" Grid.Column="1" Placeholder="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Senha'}"
+                                                          HorizontalTextAlignment="Center"
+                                                          PlaceholderColor="White" />
+                                </Grid>
+
+                            </Frame>
+
+                        </Grid>
+                        <Grid Margin="0,20,0,0" Grid.Row="7" Grid.Column="1" HeightRequest="46" WidthRequest="100">
+                            <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="White"
+                                   HeightRequest="46"
+                                   HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+                                    <controls:CustomEntry Text="{Binding ConfirmPassword, Mode=TwoWay}"
+                                                          TextColor="White" IsPassword="True" Grid.Column="1"
+                                                          Placeholder="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Confirmar Senha'}"
+                                                          HorizontalTextAlignment="Center"
+                                                          PlaceholderColor="White" />
+                                </Grid>
+
+                            </Frame>
+
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="0,20,0,0" Grid.Row="8">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SendCommand}" />
+                            </Grid.GestureRecognizers>
+                            <Frame Padding="0" CornerRadius="10" WidthRequest="300">
+                                <Grid>
+                                    <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface" />
+                                    <Label Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Cadastrar'}" VerticalOptions="Center" HorizontalOptions="Center"
+                                           FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None"
+                                           TextColor="#FFFFFFFF" />
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </ScrollView>
+            <Grid IsVisible="{Binding IsLoading}">
+                <Grid BackgroundColor="{StaticResource BackgroundColor}" Opacity="0.8"></Grid>
+                <ActivityIndicator IsRunning="True" HorizontalOptions="Center" Color="White" VerticalOptions="Center"></ActivityIndicator>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</views:MvxContentPage>

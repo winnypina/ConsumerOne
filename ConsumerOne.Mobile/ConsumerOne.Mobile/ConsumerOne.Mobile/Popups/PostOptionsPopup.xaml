@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns:controls="clr-namespace:ConsumerOne.Mobile.Controls;assembly=ConsumerOne.Mobile"  xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" x:Class="ConsumerOne.Mobile.Popups.PostOptionsPopup">
+    <Grid Padding="36" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="White" WidthRequest="300">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30">
+                </RowDefinition>
+                <RowDefinition Height="Auto">
+                </RowDefinition>
+                <RowDefinition Height="100">
+                </RowDefinition>
+            </Grid.RowDefinitions>
+            <Label x:Name="MessageLabel" TextColor="#1d193a" HorizontalTextAlignment="Center" Text="Escolha uma opção" HorizontalOptions="Center" VerticalOptions="Center" />
+            <ScrollView Grid.Row="1">
+                <StackLayout >
+                    <Grid IsVisible="{Binding OwnPost}" Margin="0,10,0,10">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditPostCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" HorizontalOptions="Center" BackgroundColor="Transparent">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="20" />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Editar" TextColor="#6f7796" FontSize="18" VerticalOptions="Center" Grid.Column="1" HorizontalTextAlignment="Center">
+                                </Label>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                    <Grid IsVisible="{Binding OwnPost}" Margin="0,10,0,10">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PausePostCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" HorizontalOptions="Center" BackgroundColor="Transparent">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="20" />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Pausar" TextColor="#6f7796" FontSize="18" VerticalOptions="Center" Grid.Column="1" HorizontalTextAlignment="Center">
+                                </Label>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                    <Grid IsVisible="{Binding OwnPost}" Margin="0,10,0,10">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding DeletePostCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" HorizontalOptions="Center" BackgroundColor="Transparent">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="20" />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Excluir" TextColor="#6f7796" FontSize="18" VerticalOptions="Center" Grid.Column="1" HorizontalTextAlignment="Center">
+                                </Label>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                    <Grid Margin="0,10,0,10">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TraceRouteCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" HorizontalOptions="Center" BackgroundColor="Transparent">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="20" />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Traçar Rota" TextColor="#6f7796" FontSize="18" VerticalOptions="Center" Grid.Column="1" HorizontalTextAlignment="Center">
+                                </Label>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                    <Grid Margin="0,10,0,10">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ReportPostCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="#b8c2e0" HeightRequest="46" HorizontalOptions="Center" BackgroundColor="Transparent">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="20" />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Denunciar" TextColor="#6f7796" FontSize="18" VerticalOptions="Center" Grid.Column="1" HorizontalTextAlignment="Center">
+                                </Label>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+            <Grid Grid.Row="2" Margin="15">
+                <Frame WidthRequest="280" x:Name="CancelFrame" HeightRequest="218" VerticalOptions="Center" HorizontalOptions="Center" BorderColor="#1d193a" HasShadow="false" BackgroundColor="White" CornerRadius="20">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding DismissPopupCommand}">
+                        </TapGestureRecognizer>
+                    </Frame.GestureRecognizers>
+                    <Label x:Name="CancelLabel" Text="CANCELAR" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="10" FontAttributes="Bold" TextColor="#6f7796" />
+                </Frame>
+            </Grid>
+        </Grid>
+    </Grid>
+</pages:PopupPage>

@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<views:MvxContentPage xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                      xmlns:viewModels="clr-namespace:ConsumerOne.Mobile.ViewModels;assembly=ConsumerOne.Mobile"
+                      xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+                      xmlns:forms1="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                      xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                      xmlns:forms2="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ConsumerOne.Mobile.Views.ProfileView">
+    <ContentPage.Content>
+         <Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid HeightRequest="95">
+                    <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface" />
+                    <Label Text="Perfil"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           Margin="0,20,0,0"
+                           FontFamily="HelveticaNeue#400"
+                           FontSize="20"
+                           FontAttributes="None"
+                           TextColor="#FFFFFFFF" />
+                </Grid>
+                <Frame Grid.Row="1"
+                       Margin="30"
+                       CornerRadius="30"
+                       BorderColor="#b8c2e0"
+                       Padding="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="90"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="150"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <forms1:CachedImage Margin="0,50,0,0"
+                                                Source="{Binding Image}"
+                                                WidthRequest="97"
+                                                HeightRequest="97"
+                                                Aspect="AspectFill"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
+                                                ErrorPlaceholder="{Binding DefaultImage}"
+                                                LoadingPlaceholder="{Binding DefaultImage}">
+                                <forms1:CachedImage.Transformations>
+                                    <transformations:CircleTransformation></transformations:CircleTransformation>
+                                </forms1:CachedImage.Transformations>
+                            </forms1:CachedImage>
+                            <Label Margin="0,10,0,0" Grid.Row="1"
+                                   Text="{Binding Name}"
+                                   HorizontalOptions="Center"
+                                   FontSize="30"
+                                   TextColor="#313952"></Label>
+                            <Grid Padding="20" Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="30"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="share.png"
+                                       Grid.Column="0"
+                                       WidthRequest="30"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="End">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ShareImageCommand}"></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Grid Grid.Column="1">
+                                    <forms1:CachedImage 
+                                                        Source="{Binding QrCodeImageSource}"
+                                                        WidthRequest="150"
+                                                        HeightRequest="150"
+                                                        Aspect="AspectFill"
+                                                        HorizontalOptions="Center"
+                                                        ErrorPlaceholder="{Binding DefaultImage}"
+                                                        LoadingPlaceholder="{Binding DefaultImage}">
+                                    </forms1:CachedImage>
+                                </Grid>
+                                <Image Grid.Column="2"
+                                       Source="download.png"
+                                       WidthRequest="30"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SaveImageCommand}"></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </Grid>
+                            <Label IsVisible="{Binding Description, Converter={StaticResource VisibleIfNotNullConverter}}" Margin="0,20,0,0" Grid.Row="3"
+                                   Text="{Binding Description}"
+                                   HorizontalOptions="Center"
+                                   HorizontalTextAlignment="Center"></Label>
+                            <StackLayout Margin="20,5,0,0" Grid.Row="4" IsVisible="{Binding Address, Converter={StaticResource VisibleIfNotNullConverter}}"
+                                         Orientation="Horizontal">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding MapCommand}"></TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                                <Image WidthRequest="20"
+                                       Source="location.png"></Image>
+                                <StackLayout>
+                                    <Label Text="{Binding Address}"></Label>
+                                    <Label Text="{Binding AddressLine1}"></Label>
+                                    <Label Text="{Binding AddressLine2}"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout Margin="20,5,0,0" Grid.Row="5" IsVisible="{Binding Website, Converter={StaticResource VisibleIfNotNullConverter}}"
+                                         Orientation="Horizontal">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenWebsiteCommand}"></TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                                <Image WidthRequest="20"
+                                       Source="website.png"></Image>
+                                <Label Text="{Binding Website}"></Label>
+                            </StackLayout>
+                            <StackLayout Margin="20,5,0,0" Grid.Row="6" IsVisible="{Binding Phone, Converter={StaticResource VisibleIfNotNullConverter}}"
+                                         
+                                         Orientation="Horizontal">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding CallCommand}"></TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                                <Image WidthRequest="20"
+                                       Source="phone.png"></Image>
+                                <Label Text="{Binding Phone}"></Label>
+                            </StackLayout>
+                        </Grid>
+                        <Grid Grid.Row="1"
+                              IsVisible="{Binding IsCurrentUser}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*"></ColumnDefinition>
+                                <ColumnDefinition Width="50*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface"
+                                                Grid.ColumnSpan="2" />
+                            <StackLayout VerticalOptions="Center"
+                                         HorizontalOptions="Center"
+                                         Grid.Column="0">
+                                <Image Source="profile.png"
+                                       WidthRequest="30"></Image>
+                                <Label Text="{Binding NumberOfFriends}"
+                                       HorizontalOptions="Center"
+                                       TextColor="White"></Label>
+                            </StackLayout>
+                            <StackLayout VerticalOptions="Center"
+                                         HorizontalOptions="Center"
+                                         Grid.Column="1">
+                                <Image Source="ratingFull.png"
+                                       WidthRequest="30"></Image>
+                                <Label Text="{Binding Rating, StringFormat='{0:N1}'}"
+                                       HorizontalOptions="Center"
+                                       TextColor="White"></Label>
+                            </StackLayout>
+                        </Grid>
+                        <Grid Grid.Row="1"
+                              IsVisible="{Binding IsCurrentUser, Converter={StaticResource BooleanInverterConverter}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="33*"></ColumnDefinition>
+                                <ColumnDefinition Width="33*"></ColumnDefinition>
+                                <ColumnDefinition Width="33*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface"
+                                                Grid.ColumnSpan="3" />
+                            <StackLayout VerticalOptions="Center"
+                                         IsVisible="{Binding IsFollowing, Converter={StaticResource BooleanInverterConverter}}"
+                                         HorizontalOptions="Center"
+                                         Grid.Column="0">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding FollowCommand}"></TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                                <Image Source="follow.png"
+                                       WidthRequest="30"></Image>
+                                <Label Text="Seguir"
+                                       HorizontalOptions="Center"
+                                       TextColor="White"></Label>
+                            </StackLayout>
+                            <StackLayout VerticalOptions="Center"
+                                         IsVisible="{Binding IsFollowing}"
+                                         HorizontalOptions="Center"
+                                         Grid.Column="0">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding UnfollowCommand}"></TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                                <Image Source="unfollow.png"
+                                       WidthRequest="30"></Image>
+                                <Label Text="Seguindo"
+                                       HorizontalOptions="Center"
+                                       TextColor="White"></Label>
+                            </StackLayout>
+                            <StackLayout VerticalOptions="Center"
+                                         HorizontalOptions="Center"
+                                         Grid.Column="1">
+                                <Image Source="mailWhite.png"
+                                       WidthRequest="30"></Image>
+                            </StackLayout>
+                            <StackLayout VerticalOptions="Center"
+                                         IsVisible="{Binding HasRated, Converter={StaticResource BooleanInverterConverter}}"
+                                         HorizontalOptions="Center"
+                                         Grid.Column="2">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding RateCommand}"></TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                                <Image Source="rating.png"
+                                       WidthRequest="30"></Image>
+                                <Label Text="Avaliar"
+                                       HorizontalOptions="Center"
+                                       TextColor="White"></Label>
+                            </StackLayout>
+                            <StackLayout VerticalOptions="Center"
+                                         IsVisible="{Binding HasRated}"
+                                         HorizontalOptions="Center"
+                                         Grid.Column="2">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding RateCommand}"></TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                                <Image Source="ratingFull.png"
+                                       WidthRequest="30"></Image>
+                                <Label Text="{Binding MyRating, StringFormat='{0:N1}'}"
+                                       HorizontalOptions="Center"
+                                       TextColor="White"></Label>
+                            </StackLayout>
+                        </Grid>
+                    </Grid>
+                </Frame>
+            </Grid>
+            <Grid IsVisible="{Binding IsLoading}">
+                <Grid BackgroundColor="{StaticResource BackgroundColor}"
+                      Opacity="0.8"></Grid>
+                <ActivityIndicator IsRunning="True"
+                                   HorizontalOptions="Center"
+                                   Color="White"
+                                   VerticalOptions="Center"></ActivityIndicator>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</views:MvxContentPage>

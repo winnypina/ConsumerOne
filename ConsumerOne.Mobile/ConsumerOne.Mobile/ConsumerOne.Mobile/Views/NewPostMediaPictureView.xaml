@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage x:TypeArguments="viewModels:NewPostMediaPictureViewModel"
+                      xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+                      xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                      xmlns:viewModels="clr-namespace:ConsumerOne.Mobile.ViewModels;assembly=ConsumerOne.Mobile"
+                      xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                      xmlns:forms1="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                      xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+                      x:Class="ConsumerOne.Mobile.Views.NewPostMediaPictureView">
+    <Grid>
+         <Grid.Padding>
+                <OnPlatform x:TypeArguments="Thickness" Android="0,0,0,60"></OnPlatform>
+            </Grid.Padding>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="30"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid BackgroundColor="Black" Grid.ColumnSpan="3" HeightRequest="75">
+                <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface"></forms:SKCanvasView>
+                    <Label Text="Promover" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,20,0,0"
+                               FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FFFFFFFF" />
+            </Grid>
+            <ScrollView Grid.Row="1" Grid.Column="1">
+                <Grid RowSpacing="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Text="Adicione até cinco fotos" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontFamily="HelveticaNeue#400" FontSize="25" FontAttributes="None" TextColor="#FF6F7796" />
+                    <Frame Grid.Row="1" BorderColor="#b8c2e0" CornerRadius="30">
+                        <Grid RowSpacing="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid RowSpacing="50">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="33*"></ColumnDefinition>
+                                    <ColumnDefinition Width="33*"></ColumnDefinition>
+                                    <ColumnDefinition Width="33*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                 <forms1:CachedImage Grid.Column="0" WidthRequest="100" HeightRequest="100" Grid.Row="0" VerticalOptions="Center" Source="{Binding Image1}" HorizontalOptions="Center">
+                                    <forms1:CachedImage.Transformations>
+                                        <transformations:CircleTransformation></transformations:CircleTransformation>
+                                    </forms1:CachedImage.Transformations>
+                                      <forms1:CachedImage.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TakePictureCommand}" CommandParameter="1"></TapGestureRecognizer>
+                                    </forms1:CachedImage.GestureRecognizers>
+                                </forms1:CachedImage>
+                                  <forms1:CachedImage Grid.Column="1" WidthRequest="100" HeightRequest="100" Grid.Row="0" VerticalOptions="Center" Source="{Binding Image2}" HorizontalOptions="Center">
+                                    <forms1:CachedImage.Transformations>
+                                        <transformations:CircleTransformation></transformations:CircleTransformation>
+                                    </forms1:CachedImage.Transformations>
+                                      <forms1:CachedImage.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TakePictureCommand}" CommandParameter="2"></TapGestureRecognizer>
+                                    </forms1:CachedImage.GestureRecognizers>
+                                </forms1:CachedImage>
+                                  <forms1:CachedImage Grid.Column="2" WidthRequest="100" HeightRequest="100" Grid.Row="0" VerticalOptions="Center" Source="{Binding Image3}" HorizontalOptions="Center">
+                                    <forms1:CachedImage.Transformations>
+                                        <transformations:CircleTransformation></transformations:CircleTransformation>
+                                    </forms1:CachedImage.Transformations>
+                                      <forms1:CachedImage.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TakePictureCommand}" CommandParameter="3"></TapGestureRecognizer>
+                                    </forms1:CachedImage.GestureRecognizers>
+                                </forms1:CachedImage>
+                                  <forms1:CachedImage Grid.Column="0" WidthRequest="100" HeightRequest="100" Grid.Row="1" VerticalOptions="Center" Source="{Binding Image4}" HorizontalOptions="Center">
+                                    <forms1:CachedImage.Transformations>
+                                        <transformations:CircleTransformation></transformations:CircleTransformation>
+                                    </forms1:CachedImage.Transformations>
+                                      <forms1:CachedImage.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TakePictureCommand}" CommandParameter="4"></TapGestureRecognizer>
+                                    </forms1:CachedImage.GestureRecognizers>
+                                </forms1:CachedImage>
+                                  <forms1:CachedImage Grid.Column="1" WidthRequest="100" HeightRequest="100" Grid.Row="1" VerticalOptions="Center" Source="{Binding Image5}" HorizontalOptions="Center">
+                                    <forms1:CachedImage.Transformations>
+                                        <transformations:CircleTransformation></transformations:CircleTransformation>
+                                    </forms1:CachedImage.Transformations>
+                                      <forms1:CachedImage.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TakePictureCommand}" CommandParameter="5"></TapGestureRecognizer>
+                                    </forms1:CachedImage.GestureRecognizers>
+                                </forms1:CachedImage>
+                            </Grid>
+                            <Grid Margin="0,20,0,0" Grid.Row="1">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SendCommand}" />
+                                </Grid.GestureRecognizers>
+                                <Frame Padding="0" CornerRadius="10" WidthRequest="300">
+                                    <Grid>
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding NextCommand}"></TapGestureRecognizer>
+                                        </Grid.GestureRecognizers>
+                                        <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface" />
+                                        <Label Text="Continuar" VerticalOptions="Center" HorizontalOptions="Center" FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FFFFFFFF" />
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                        </Grid>
+                    </Frame>
+
+                </Grid>
+            </ScrollView>
+        </Grid>
+
+
+    </Grid>
+</views:MvxContentPage>

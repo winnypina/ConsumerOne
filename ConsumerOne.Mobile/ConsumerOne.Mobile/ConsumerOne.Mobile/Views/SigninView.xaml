@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<views:MvxContentPage x:TypeArguments="viewModels:SigninViewModel" xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                      xmlns:viewModels="clr-namespace:ConsumerOne.Mobile.ViewModels;assembly=ConsumerOne.Mobile"
+                      xmlns:controls="clr-namespace:ConsumerOne.Mobile.Controls"
+                      xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+                      xmlns:converters="clr-namespace:ConsumerOne.Mobile.Converters;assembly=ConsumerOne.Mobile"
+                      BackgroundColor="{StaticResource BackgroundColor}"
+                      x:Class="ConsumerOne.Mobile.Views.SigninView">
+    <ContentPage.Content>
+        <Grid>
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid Margin="0,80,0,0" Grid.ColumnSpan="3">
+                    <Image Source="logo.png" VerticalOptions="Center" HorizontalOptions="Center" />
+                </Grid>
+                <Grid Margin="0,40,0,0" Grid.Row="1" Grid.Column="1">
+                    <Label Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Texto Principal'}"
+                           VerticalOptions="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"
+                           FontFamily="HelveticaNeue#400" FontSize="15" FontAttributes="None" TextColor="#FFB8C2E0" />
+                </Grid>
+                <Grid Grid.Row="2" Grid.Column="1" Margin="0,20,0,0">
+                    <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="White" HeightRequest="46"
+                           HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="20" />
+                            </Grid.ColumnDefinitions>
+                            <controls:CustomEntry BackgroundColor="Transparent" Text="{Binding Username, Mode=TwoWay}" TextColor="White"  Grid.Column="1" Placeholder="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Login'}" HorizontalTextAlignment="Center"
+                                                  PlaceholderColor="White" />
+                        </Grid>
+
+                    </Frame>
+
+                </Grid>
+                <Grid Grid.Row="3" Grid.Column="1" Margin="0,20,0,0">
+                    <Frame CornerRadius="10" WidthRequest="300" Padding="0" BorderColor="White" HeightRequest="46"
+                           HorizontalOptions="Center" BackgroundColor="Transparent">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="20" />
+                            </Grid.ColumnDefinitions>
+                            <controls:CustomEntry  BackgroundColor="Transparent"  Text="{Binding Password, Mode=TwoWay}" TextColor="White" IsPassword="True"  Grid.Column="1" Placeholder="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Senha'}" HorizontalTextAlignment="Center"
+                                                  PlaceholderColor="White" />
+                        </Grid>
+
+                    </Frame>
+
+                </Grid>
+                <Grid Margin="0,20,0,0" Grid.Row="4" Grid.Column="1" HeightRequest="46" WidthRequest="100">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SendCommand}"></TapGestureRecognizer>
+                    </Grid.GestureRecognizers>
+                    <Frame Padding="0" CornerRadius="10" WidthRequest="300">
+                        <Grid>
+                            <forms:SKCanvasView PaintSurface="OnCanvasViewPaintSurface"></forms:SKCanvasView>
+                            <Label Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Entrar'}" VerticalOptions="Center" HorizontalOptions="Center" FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FFFFFFFF" />
+                        </Grid>
+                    </Frame>
+                </Grid>
+                <Grid Margin="0,10,0,0" Grid.Row="5" Grid.Column="1" HeightRequest="46" WidthRequest="100">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"></TapGestureRecognizer>
+                    </Grid.GestureRecognizers>
+                    <Label Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Recuperar'}" VerticalOptions="Center" HorizontalOptions="Center" FontFamily="HelveticaNeue#400" FontSize="10" FontAttributes="None" TextDecorations="Underline" TextColor="#FFFFFFFF" />
+                </Grid>
+                <Grid Margin="0,20,0,0" Grid.Row="6" Grid.Column="1" HeightRequest="46" WidthRequest="100">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding LoginWithFacebookCommand}"></TapGestureRecognizer>
+                    </Grid.GestureRecognizers>
+                    <Frame Padding="0" CornerRadius="10" WidthRequest="300">
+                        <Grid>
+                            <Grid BackgroundColor="#3b5998"></Grid>
+                            <Label Text="{Binding Texts, Converter={StaticResource TranslatedTextConverter}, ConverterParameter='Facebook'}" VerticalOptions="Center" HorizontalOptions="Center" FontFamily="HelveticaNeue#400" FontSize="20" FontAttributes="None" TextColor="#FFFFFFFF" />
+                        </Grid>
+                    </Frame>
+                </Grid>
+            </Grid>
+            <Grid IsVisible="{Binding IsLoading}">
+                <Grid BackgroundColor="{StaticResource BackgroundColor}" Opacity="0.8"></Grid>
+                <ActivityIndicator IsRunning="True" HorizontalOptions="Center" Color="White" VerticalOptions="Center"></ActivityIndicator>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</views:MvxContentPage>
